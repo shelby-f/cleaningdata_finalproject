@@ -1,0 +1,44 @@
+---
+title: "CodeBook"
+author: "Shelby Fillinger"
+date: "3/3/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Assignment 
+
+Create one R script called run_analysis.R that does the following. 
+
+1. Merges the training and the test sets to create one data set.
+2. Extracts only the measurements on the mean and standard deviation for each measurement. 
+3. Uses descriptive activity names to name the activities in the data set
+4. Appropriately labels the data set with descriptive variable names. 
+5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+
+## Download data 
+Download data from https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip and unzip
+
+## Step 1 and 4: Merge Training and Test Sets and Descriptive Variable Names
+UCI HAR Dataset contains two folders, "train" and "test". 
+Read in the training data (X_train.txt), training labels (y_train.txt), test data (X_test.txt) and test labels (y_test.txt).
+
+Step 4, label the columns with descriptive names. This is provided in the UCI HAR Dataset, as features.txt file. Read in and use names() to rewrite the column headers.
+
+Install dplyr package. 
+Using "bind_cols" - merge the training labels and training data. And the test data and test labels.
+Then use bind_rows to merge training and test data. 
+
+## Step 3: Descriptive Activity Names 
+UCI HAR Dataset contains activity_labels, that matches the label (step 1) to the activity title. I used a less than elegant method, but manually mutated the data set by # and gave it the activity name. 
+
+## Step 2: Extract only measurements of mean and standard deviation
+Create a new data set and use select() to pick measurements with mean and std in the title.
+I also included V1, which included the activity labels (used for step 5).
+
+## Step 5: Independent Data Set, average of each, variable for each activity and each subject
+Create a new data set, then subset the data by the activity identifier and calculate the mean (average).
+
